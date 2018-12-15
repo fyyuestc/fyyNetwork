@@ -47,7 +47,7 @@ class AllCityTableViewController: UITableViewController {
         let url = cityURL![indexPath.row]
         AF.request(url).responseJSON { (response) in
             self.cityInfo = response.value as? [String:Any] 
-            print(self.cityInfo)
+            //print(self.cityInfo)
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "ShowCity", sender: self)
             }

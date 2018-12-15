@@ -17,15 +17,15 @@ class ViewController: UIViewController {
     var cityInfo : [String : Any]?
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("-----")
-        print(cityInfo)
+        //print("-----")
+        //print(cityInfo as Any)
         // Do any additional setup after loading the view, typically from a nib.
         let info1 = cityInfo!["cityInfo"] as! [String : String]
         city.text = info1["city"]
         date.text = (cityInfo!["date"] as! String)
         let info3 = cityInfo!["data"] as! [String : Any]
-        tempe.text = info3["wendu"] as! String
-        wuran.text = info3["quality"] as! String
+        tempe.text = info3["wendu"] as? String
+        wuran.text = info3["quality"] as? String
     }
 
 
