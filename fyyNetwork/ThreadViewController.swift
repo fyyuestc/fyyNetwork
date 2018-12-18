@@ -10,9 +10,32 @@ import UIKit
 
 class ThreadViewController: UIViewController {
 
+    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBAction func calculate(_ sender: Any) {
+        var sum = 0
+        for _ in 1...100 {
+            DispatchQueue.global().async {
+                print("Run thread:\(Thread.current)")
+                
+                for i in 1...1000 {
+                    usleep(10000)
+                    sum += i
+                }
+                DispatchQueue.main.async {
+                    self.testLabel.text = "sum:\(sum)"
+                }
+            }
+        }
+    }
+    var count = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            self.count += 1
+            self.timerLabel.text = "\(self.count)"
+            //            print("timer thread:\(Thread.current)")
+            }.fire()
         // Do any additional setup after loading the view.
     }
 

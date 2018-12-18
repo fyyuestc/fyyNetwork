@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import WebKit
 
-class WebViewController: UIViewController {
 
+class WebViewController: UIViewController,WKNavigationDelegate,WKUIDelegate{
+
+    @IBOutlet weak var tfUrl: UITextField!
+    @IBOutlet weak var webView: WKWebView!
+    
+    @IBAction func clicked(_ sender: Any) {
+        if let url = URL(string: tfUrl.text ?? "") {
+            webView.load(URLRequest(url: url))
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if let url = URL(string: (tfUrl.text)!) {
+            webView.load(URLRequest(url: url))
+            webView.navigationDelegate = self
+            webView.uiDelegate = self
+          
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -20,7 +35,7 @@ class WebViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+  
 
     /*
     // MARK: - Navigation
